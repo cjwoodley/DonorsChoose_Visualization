@@ -1,0 +1,1 @@
+db.getCollection('projects').find({},{'school_state': 1, 'resource_type': 1, 'poverty_level': 1, 'date_posted': 1, 'total_donations': 1, '_id': 0})

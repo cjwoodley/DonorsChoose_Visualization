@@ -7,9 +7,15 @@ function makeGraphs(error, projectsJson, statesJson) {
 	
 	//Clean projectsJson data
 	var donorschooseProjects = projectsJson;
-	var dateFormat = d3.time.format("%Y-%m-%d");
+	//var dateFormat = d3.time.format("%Y-%m-%d");
+	var dateFormat = d3.time.format("%Y-%m-%d %H:%M:%S")
+	//var dateFormat = d3.timeFormat("%Y-%m-%d %H:%M:%S");
+	//var dateParse = d3.timeParse("%Y-%m-%d %H:%M:%S");
+	//var dateFormat = d3.time.format("%Y-%m-%d %H:%M:%S.%LZ");
+	//var dateFormat = d3.time.format("%Y-%m-%d %X");
 	donorschooseProjects.forEach(function(d) {
 		d["date_posted"] = dateFormat.parse(d["date_posted"]);
+		//d["date_posted"] = dateParse(d["date_posted"]);
 		d["date_posted"].setDate(1);
 		d["total_donations"] = +d["total_donations"];
 	});

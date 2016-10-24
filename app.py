@@ -7,11 +7,14 @@ from bson.json_util import dumps
 
 app = Flask(__name__)
 
-MONGODB_HOST = 'localhost'
-MONGODB_PORT = 27017
-DBS_NAME = 'donorschoose'
+MONGODB_HOST = '192.168.99.100'
+MONGODB_PORT = 32772
+DBS_NAME = 'local'
 COLLECTION_NAME = 'projects'
 FIELDS = {'school_state': True, 'resource_type': True, 'poverty_level': True, 'date_posted': True, 'total_donations': True, '_id': False}
+#FIELDS = {'"school_state"': True, '"resource_type"': True, '"poverty_level"': True, '"date_posted"': True, '"total_donations"': True, '_id': False}
+
+#FIELDS = {'"school_state"': True, '_id': False}
 
 
 @app.route("/")
@@ -23,7 +26,8 @@ def index():
 def donorschoose_projects():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
     collection = connection[DBS_NAME][COLLECTION_NAME]
-    projects = collection.find(projection=FIELDS, limit=100000)
+    #projects = collection.find(projection=FIELDS, limit=20)
+    projects = collection.find({},FIELDS,limit=100000) 
     #projects = collection.find(projection=FIELDS)
     json_projects = []
     for project in projects:
